@@ -1,0 +1,48 @@
+body{
+  text-align: center;
+  background-color: #F3EEEA;
+}
+.searchBar {margin-top: 3rem;
+  margin-inline: auto;
+  display: flex;
+  background-color: transparent;
+  width: 80%;
+  border-radius: 16px;
+  font-size: 16px;
+  border: 1px solid #dfccaa;
+  justify-content: space-between;
+}
+
+.inputStyle {
+  background-color: #F3EEEA;
+  width: 90%;
+  border-radius: 16px;
+  padding: 20px 10px;
+  border: none;
+  outline: none;
+}
+.loaderGif{
+  height: calc(100vh - 105px);
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.searchImg {
+  width: 10%;
+}
+table{
+  width: 80%;
+    margin-inline: auto;
+    margin-top: 4rem;
+}
+thead{
+  margin-bottom: 20px !important;
+}
+th{ 
+  font-size: 20px !important;
+}
+td{
+  vertical-align: text-top;
+}
