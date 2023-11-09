@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import SearchBar from "../Header/SearchBar";
 import Table from "../Table/Table";
 import gif from "../../assets/loader.gif";
 import Pagination from "../Pagination/Pagination";
+import Filter from "../Filter/Filter";
 
 const Home = () => {
   const [dataOrg, setDataOrg] = useState([]);
@@ -14,7 +14,6 @@ const Home = () => {
     channel: [],
     state: [],
   });
-  const [category, setCategory] = useState("");
 
   const getTotalPages = (totalData) => {
     const totalPages = Math.ceil(totalData / 50);
@@ -25,11 +24,9 @@ const Home = () => {
     setCurrentPage(pageNumber);
   };
 
-  const handleDropdownChange = async(e) =>{
-    console.log('e.target.value', e.target.name)
-    if( e.target.name === "category"){
+  const handleDropdownChange = async (e) => {
+    if (e.target.name === "category") {
       const result = await fetch(
-      
         `https://staging.iamdave.ai/list/supply?_page_number=1&category=${e.target.value}`,
         {
           headers: {
@@ -41,13 +38,12 @@ const Home = () => {
         }
       );
       const response = await result.json();
-      const filterData = response?.data
-      setDataOrg(filterData)
-      
-    }
-    else if( e.target.name === "channel"){
+      const filterData = response;
+      console.log('filterData', filterData)
+      setDataOrg(filterData);
+      setTotalPages(getTotalPages(filterData.total_number));
+    } else if (e.target.name === "channel") {
       const result = await fetch(
-      
         `https://staging.iamdave.ai/list/supply?_page_number=1&channel=${e.target.value}`,
         {
           headers: {
@@ -59,12 +55,12 @@ const Home = () => {
         }
       );
       const response = await result.json();
-      const filterData = response?.data
-      setDataOrg(filterData)
-    }
-    else if( e.target.name === "state"){
+      const filterData = response;
+      setDataOrg(filterData);
+      setTotalPages(getTotalPages(filterData.total_number));
+
+    } else if (e.target.name === "state") {
       const result = await fetch(
-      
         `https://staging.iamdave.ai/list/supply?_page_number=1&state=${e.target.value}`,
         {
           headers: {
@@ -76,14 +72,14 @@ const Home = () => {
         }
       );
       const response = await result.json();
-      const filterData = response?.data
-      setDataOrg(filterData)
+      const filterData = response;
+      setDataOrg(filterData);
+      setTotalPages(getTotalPages(filterData.total_number));
+
+    } else {
+      getData();
     }
-
-    console.log('dataOrg', dataOrg)
-
-   
-  }
+  };
 
   const getOptions = async () => {
     const filterArr = ["category", "channel", "state"];
@@ -101,47 +97,53 @@ const Home = () => {
         }
       );
       const response = await result.json();
-      const resData = response?.data
+      const resData = response?.data;
       setIsLoading(false);
       i === 0
-        ? setOption((prevState)=>( {...prevState, category: Array.from(Object.keys(resData)) }) )
+        ? setOption((prevState) => ({
+            ...prevState,
+            category: Array.from(Object.keys(resData)),
+          }))
         : i === 1
-        ? setOption((prevState)=>( {...prevState, channel: Array.from(Object.keys(resData)) }) )
+        ? setOption((prevState) => ({
+            ...prevState,
+            channel: Array.from(Object.keys(resData)),
+          }))
         : i === 2
-        ? setOption((prevState)=>( {...prevState, state: Array.from(Object.keys(resData)) }) )
-        : setOption((prevState)=>( {...prevState}) )
+        ? setOption((prevState) => ({
+            ...prevState,
+            state: Array.from(Object.keys(resData)),
+          }))
+        : setOption((prevState) => ({ ...prevState }));
     }
   };
 
+  async function getData() {
+    setIsLoading(true);
+    const res = await fetch(
+      `https://staging.iamdave.ai/list/supply?_page_number=${currentPage}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "X-I2CE-ENTERPRISE-ID": "dave_vs_covid",
+          "X-I2CE-USER-ID": "ananth+covid@i2ce.in",
+          "X-I2CE-API-KEY": "0349234-38472-1209-2837-3432434",
+        },
+      }
+    );
+    const apiData = await res.json();
+    setIsLoading(false);
+    if (apiData) {
+      setDataOrg(apiData);
+      setTotalPages(getTotalPages(apiData.total_number));
+    }
+  }
 
-  //////
   useEffect(() => {
     getOptions();
   }, []);
 
   useEffect(() => {
-    async function getData() {
-      setIsLoading(true);
-      const res = await fetch(
-        `https://staging.iamdave.ai/list/supply?_page_number=${currentPage}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "X-I2CE-ENTERPRISE-ID": "dave_vs_covid",
-            "X-I2CE-USER-ID": "ananth+covid@i2ce.in",
-            "X-I2CE-API-KEY": "0349234-38472-1209-2837-3432434",
-          },
-        }
-      );
-      const apiData = await res.json();
-      setIsLoading(false);
-      if (apiData) {
-        setDataOrg(apiData);
-
-        setTotalPages(getTotalPages(apiData.total_number));
-      }
-    }
-
     getData();
   }, [currentPage]);
 
@@ -154,24 +156,7 @@ const Home = () => {
       ) : (
         <>
           {/* <SearchBar getSearchData={getSearchData} /> */}
-          <div className="filter-section">
-            <select name="category" id="" onChange={handleDropdownChange}>
-              {option.category.map((e,i)=>{
-                return  <option  key={i} value={e}  >{e}</option>
-              })}
-            </select>
-            <select name="channel" id="" onChange={handleDropdownChange}>
-            {option.channel.map((e,i)=>{
-                return  <option  key={i} value={e}  >{e}</option>
-              })}
-            </select>
-            <select name="state" id="" onChange={handleDropdownChange}>
-            {option.state.map((e,i)=>{
-                return  <option  key={i} value={e}  >{e}</option>
-              })}
-            </select>
-          </div>
-
+          <Filter handleDropdownChange={handleDropdownChange} option={option} />
           <Table dataOrg={dataOrg} />
           <Pagination
             currentPage={currentPage}

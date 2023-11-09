@@ -23,7 +23,7 @@ const Table = ({ dataOrg }) => {
                   <td>{e.category}</td>
                   <td>{e.channel}</td>
                   <td style={{ width: "260px" }}>{e.request_description}</td>
-                  <td>{e.contact_numbers}</td>
+                  <td style={{ width: "150px !important" }}>{e.contact_numbers}</td>
                   <td>{e.state}</td>
                   <td>{e.district ? e.district : "NA"}</td>
                   <td>{e.source_time}</td>
