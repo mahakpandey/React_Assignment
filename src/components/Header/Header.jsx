@@ -1,10 +1,15 @@
 import React from 'react'
+import { useContext } from 'react'
+import { Data } from '../../App'
+
+
 
 const Header = () => {
+  
   return (
-    <div>
+    <>
       <h1>Suppliers</h1>
-    </div>
+    </>
   )
 }
 
