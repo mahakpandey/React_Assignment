@@ -3,14 +3,14 @@ import React from "react";
 const Table = ({ dataOrg }) => {
   return (
     <>
-      <div>
+      <div className="overflow-x-scroll">
         <table>
           <thead>
             <tr>
               <th>Category</th>
               <th>Channel</th>
               <th>Request Des.</th>
-              <th>Contact No.</th>
+              <th style={{ width: "150px !important"}}>Contact No.</th>
               <th>State</th>
               <th>District</th>
               <th>Source Time</th>
@@ -23,7 +23,7 @@ const Table = ({ dataOrg }) => {
                   <td>{e.category}</td>
                   <td>{e.channel}</td>
                   <td style={{ width: "260px" }}>{e.request_description}</td>
-                  <td style={{ width: "150px !important" }}>{e.contact_numbers}</td>
+                  <td style={{ width: "150px !important"}}>{e.contact_numbers}</td>
                   <td>{e.state}</td>
                   <td>{e.district ? e.district : "NA"}</td>
                   <td>{e.source_time}</td>

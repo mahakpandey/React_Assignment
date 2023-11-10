@@ -1,7 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto&display=swap');
+
+:root {
+  --gradient:  linear-gradient(to right , #527794 , #594686);
+}
+
+
 body{
   text-align: center;
-  background-color: #F6F1EE;
-  color: #4F4A45
+  background:var(--gradient);
+  color: #f1f8ff;
+  /* font-family: 'roboto'; */
+  font-family: 'Open Sans', sans-serif;
+font-family: 'Roboto', sans-serif;
 }
 .searchBar {margin-top: 3rem;
   background-color: #F6F1EE;
@@ -16,6 +26,7 @@ body{
 h1{
   text-align: center;
   margin: 1rem 0;
+  color: #f1f8ff !important;
 }
 .inputStyle {
   background-color: #F6F1EE;
@@ -37,6 +48,8 @@ h1{
     overflow-x: hidden;
     overflow-y: scroll;
 }
+.overflow-x-scroll {  max-width: 100% !important;
+  margin-inline: auto;}
 .searchImg {
   width: 65px;
     padding: 13px;
@@ -45,21 +58,30 @@ table{
   width: 80%;
     margin-inline: auto;
     margin-top: 1.5rem;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
    
 }
 thead{
   margin-bottom: 20px !important;
-  background-color: #4F4A45;
+  background: linear-gradient(to right , #56608d , #56608e);
   color: #F6F1EE;
   padding: 1rem ;
 }
 th{ 
   font-size: 20px !important;
+  color: #f1f8ff;
+  background: linear-gradient(to right , #56608d , #56608e);
 }
 td,th {padding: .5em 1em;}
 tr{
   padding: 20px;
-  border-bottom: 1px solid #4f4a4546 !important;
+  color: #f1f8ff;
+  background: linear-gradient(to right , #7095a9 , #7b6da0);
+  border-bottom: 1px solid #9cbdc7 !important;
+  font-size: 14px !important;
+}
+tr:hover{
+  background: linear-gradient(to right , #9cbdc7 , #a1a7c1);
 }
 td{
   vertical-align: text-top;
@@ -69,9 +91,28 @@ td{
   margin-top: 2rem;
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
 }
 select{
-    border: 1px solid #4F4A45;
+  background: linear-gradient(to right , #9cbdc7 , #a1a7c1);
+    border: 1px solid #7095a9;
     padding: 5px 15px;
     border-radius: 10px;
+    color:#f1f8ff;
+    cursor: pointer;
+}
+
+.select-options{
+  background: #688b9e !important;
+  cursor: pointer !important;
+
+}
+.select-options:hover {
+  background: #376e8b !important;
+  cursor: pointer !important;
+}
+
+.active .btn-danger{
+  background-color: #332645 !important;
+  border: 1px solid #332645 !important;
 }

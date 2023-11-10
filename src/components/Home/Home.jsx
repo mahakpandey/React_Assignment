@@ -26,6 +26,7 @@ const Home = () => {
 
   const handleDropdownChange = async (e) => {
     if (e.target.name === "category") {
+      setIsLoading(true);
       const result = await fetch(
         `https://staging.iamdave.ai/list/supply?_page_number=1&category=${e.target.value}`,
         {
@@ -39,10 +40,12 @@ const Home = () => {
       );
       const response = await result.json();
       const filterData = response;
-      console.log('filterData', filterData)
+      console.log("filterData", filterData);
       setDataOrg(filterData);
       setTotalPages(getTotalPages(filterData.total_number));
+      setIsLoading(false);
     } else if (e.target.name === "channel") {
+      setIsLoading(true);
       const result = await fetch(
         `https://staging.iamdave.ai/list/supply?_page_number=1&channel=${e.target.value}`,
         {
@@ -58,8 +61,9 @@ const Home = () => {
       const filterData = response;
       setDataOrg(filterData);
       setTotalPages(getTotalPages(filterData.total_number));
-
+      setIsLoading(false);
     } else if (e.target.name === "state") {
+      setIsLoading(true);
       const result = await fetch(
         `https://staging.iamdave.ai/list/supply?_page_number=1&state=${e.target.value}`,
         {
@@ -75,7 +79,7 @@ const Home = () => {
       const filterData = response;
       setDataOrg(filterData);
       setTotalPages(getTotalPages(filterData.total_number));
-
+      setIsLoading(false);
     } else {
       getData();
     }
