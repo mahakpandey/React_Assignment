@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 
 :root {
   --gradient:  linear-gradient(to right , #527794 , #594686);
@@ -9,9 +10,10 @@ body{
   text-align: center;
   background:var(--gradient);
   color: #f1f8ff;
-  /* font-family: 'roboto'; */
-  font-family: 'Open Sans', sans-serif;
-font-family: 'Roboto', sans-serif;
+  font-family: 'Poppins', sans-serif;
+}
+.wrapper{
+  height: 100vh;
 }
 .searchBar {margin-top: 3rem;
   background-color: #F6F1EE;
@@ -23,9 +25,9 @@ font-family: 'Roboto', sans-serif;
   border: 1px solid #6c5f5bad;
   justify-content: space-between;
 }
-h1{
+h2{
   text-align: center;
-  margin: 1rem 0;
+  margin: 1rem 0 !important;
   color: #f1f8ff !important;
 }
 .inputStyle {
@@ -58,14 +60,17 @@ table{
   width: 80%;
     margin-inline: auto;
     margin-top: 1.5rem;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-   
+    box-shadow: rgb(0 0 0 / 20%) 0px 8px 24px
 }
 thead{
-  margin-bottom: 20px !important;
   background: linear-gradient(to right , #56608d , #56608e);
   color: #F6F1EE;
   padding: 1rem ;
+}
+Table tbody{
+  font-weight: 500;
+  overflow-x: scroll;
+  overflow-y: scroll;
 }
 th{ 
   font-size: 20px !important;
@@ -100,19 +105,37 @@ select{
     border-radius: 10px;
     color:#f1f8ff;
     cursor: pointer;
+    font-weight: 500;
 }
-
 .select-options{
   background: #688b9e !important;
   cursor: pointer !important;
-
 }
 .select-options:hover {
   background: #376e8b !important;
   cursor: pointer !important;
 }
-
 .active .btn-danger{
   background-color: #332645 !important;
   border: 1px solid #332645 !important;
+  color: #fff !important;
+}
+.page-link{
+  color: #332645 !important;
+}
+::-webkit-scrollbar {
+  height: 5px;
+  width: 5px;
+  
+}
+::-webkit-scrollbar-track {
+  background: #aaaaaa9a;
+}
+::-webkit-scrollbar-thumb {
+  background: #7b6da0;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #7b6da0;
+  border-radius: 3px;
 }

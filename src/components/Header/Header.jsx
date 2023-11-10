@@ -4,7 +4,7 @@ const Header = () => {
   
   return (
     <>
-      <h1>Supplier Data</h1>
+      <h2>Supplier Data</h2>
     </>
   )
 }

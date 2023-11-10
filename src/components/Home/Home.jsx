@@ -136,11 +136,14 @@ const Home = () => {
       }
     );
     const apiData = await res.json();
-    setIsLoading(false);
+   
     if (apiData) {
       setDataOrg(apiData);
       setTotalPages(getTotalPages(apiData.total_number));
+      setIsLoading(false);
     }
+     
+
   }
 
   useEffect(() => {
